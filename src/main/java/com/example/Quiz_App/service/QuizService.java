@@ -8,6 +8,7 @@ import com.example.Quiz_App.repository.AnswerRepository;
 import com.example.Quiz_App.repository.QuestionsRepository;
 import com.example.Quiz_App.repository.QuizSessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,26 +28,26 @@ public class QuizService {
     private List<QuizQuestions> questions;
     private int currentIndex = 0;
 
+/*
+    public void startQuiz(String userName, String mobileNo,int count) {
+        QuizSession quizSession = new QuizSession();
+        try {
+            quizSession.setUserName(userName);
+            quizSession.setMobileNo(mobileNo);
+        }catch (DataIntegrityViolationException e){
+            System.out.println("mobile number already exist");
+        }
 
-//    public void startQuiz(String userName, String mobileNo,int count) {
-//        QuizSession quizSession = new QuizSession();
-//        try {
-//            quizSession.setUserName(userName);
-//            quizSession.setMobileNo(mobileNo);
-//        }catch (DataIntegrityViolationException e){
-//            System.out.println("mobile number already exist");
-//        }
-//
-//
-//        quizSessionRepository.save(quizSession);
-//
-//        questions = questionsRepository.findRandomQuestions(count);
-//        currentIndex = 0;
-//
-//        if (questions.isEmpty()) {
-//            throw new IllegalStateException("No questions found in the database.");
-//        }
-//    }
+
+        quizSessionRepository.save(quizSession);
+
+        questions = questionsRepository.findRandomQuestions(count);
+        currentIndex = 0;
+
+        if (questions.isEmpty()) {
+            throw new IllegalStateException("No questions found in the database.");
+        }
+    }*/
 
     public boolean startQuiz(QuizSessionRequest quizSessionRequest){
         QuizSession quizSession = quizSessionRepository.findById(quizSessionRequest.getSessionId()).orElse(null);
